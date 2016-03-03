@@ -1,0 +1,26 @@
+#-------------------------------------
+# NinjaSentry Fortress Htaccess 2016
+#-------------------------------------
+Options +FollowSymLinks
+Options -Indexes
+IndexIgnore *
+AddDefaultCharset UTF-8
+DirectoryIndex index.php
+
+RewriteEngine on
+
+# go to redirect location
+RewriteCond %{REQUEST_URI} /go/to/[a-z]+ [NC]
+RewriteRule (.+) index.php?route=$1 [QSA,L]
+
+# redirect www to non www
+RewriteCond %{REQUEST_URI} (.*) [NC]
+RewriteCond %{HTTP_HOST} .
+RewriteCond %{HTTP_HOST} !^ninjasentry\.com
+RewriteRule (.*) http://ninjasentry.com/$1 [R=301,L]
+
+# url rewrite
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !trap.php
+RewriteRule (.+) index.php?route=$1 [QSA,L]
