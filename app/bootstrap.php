@@ -34,7 +34,7 @@ final class Bootstrap
                 ->secure()
                 ->request();
 
-            $app->dispatch()
+            echo $app->dispatch()
                 ->getContent();
         }
         catch( \Exception $ex )
