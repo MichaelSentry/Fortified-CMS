@@ -1,0 +1,10 @@
+#-------------------------------------
+# NinjaSentry Fortress Htaccess 2016
+#-------------------------------------
+Options +FollowSymLinks
+Options -Indexes
+IndexIgnore *
+AddDefaultCharset UTF-8
+RewriteEngine On
+RewriteRule ^$ public/ [L]
+RewriteRule (.*) public/$1 [L]
