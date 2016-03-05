@@ -28,11 +28,11 @@ class Permissions
     {
         if( mb_strtoupper( $profile['method'] ) === 'POST' )
         {
-            if( $profile['access_permissions'] !== self::POST_PERMISSION_ALLOW ) {
-                return false;
+            if( $profile['access_permissions'] !== self::POST_PERMISSION_DENY ) {
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
 }
