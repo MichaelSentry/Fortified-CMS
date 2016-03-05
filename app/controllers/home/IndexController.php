@@ -19,14 +19,16 @@ class IndexController extends AppController
          */
         $this->response->content( 'page', [
 
-            'title'           => 'NinjaSentry Fortress',
+            'title'           => 'NinjaSentry Fortress | Fortified Content Management',
 
             'meta'            => [
                 'description' => 'NinjaSentry Homepage',
                 'keywords'    => 'web application security solutions',
             ],
 
-            'content'         => $this->response->fetch( 'home/index' ),
+            'content'         => $this->response->wrapLayout( 'Fortress Homepage'
+                , $this->response->fetch( 'home/index' )
+            )
 
         ]);
 
