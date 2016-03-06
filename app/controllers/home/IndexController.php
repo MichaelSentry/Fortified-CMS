@@ -1,6 +1,8 @@
 <?php
 namespace App\Controllers\Home;
-use App\Kernel\AppController;
+
+use NinjaSentry\Sai\Response;
+use NinjaSentry\Sai\Kernel\AppController;
 
 /**
  * Class IndexController
@@ -8,25 +10,25 @@ use App\Kernel\AppController;
  */
 class IndexController extends AppController
 {
-    public function __construct( $response ){
+    public function __construct( Response $response ){
         parent::__construct( $response );
     }
 
     public function getIndex()
     {
         /**
-         * Prepare page data
+         * Prepare page data container
          */
         $this->response->content( 'page', [
 
             'title'           => 'NinjaSentry Fortress | Fortified Content Management',
 
             'meta'            => [
-                'description' => 'NinjaSentry Homepage',
-                'keywords'    => 'web application security solutions',
+                'description' => 'Fortified content management system',
+                'keywords'    => 'fortified content management',
             ],
 
-            'content'         => $this->response->wrapLayout( 'Fortress Homepage'
+            'content'         => $this->response->wrap( 'Fortress Homepage'
                 , $this->response->fetch( 'home/index' )
             )
 
