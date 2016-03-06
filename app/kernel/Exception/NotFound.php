@@ -3,6 +3,7 @@ namespace App\Kernel\Exception;
 
 use NinjaSentry\Sai\Response;
 use NinjaSentry\Sai\Tools\Robots;
+use NinjaSentry\Katana\Http\Status;
 use NinjaSentry\Sai\Kernel\AppController;
 
 /**
