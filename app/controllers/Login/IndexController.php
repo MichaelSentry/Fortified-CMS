@@ -7,7 +7,7 @@ use NinjaSentry\Sai\Kernel\AppController;
 
 /**
  * Class IndexController
- * @package App\Controllers\Home
+ * @package App\Controllers\Login
  */
 class IndexController extends AppController
 {
