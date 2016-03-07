@@ -6,7 +6,7 @@ use NinjaSentry\Sai\Application;
 /**
  * Core Functions
  */
-require '../../vendor/NinjaSentry/Sai/functions.php';
+require '../../vendor/NinjaSentry/Sai/Functions/global.php';
 
 /**
  * Class Bootstrap
@@ -36,6 +36,7 @@ final class Bootstrap
 
             echo $app->dispatch()
                 ->getContent();
+
         }
         catch( \Exception $ex )
         {
@@ -57,18 +58,12 @@ final class Bootstrap
         {
             $finder    = [ chr(0), '\\' ];
             $replacer  = [ '' ,  '/' ];
-            $classFile = mb_strtolower(
-                    str_replace(
-                        $finder,
-                        $replacer,
-                        $className
-                    )
-                ) . '.php';
+            $classFile = str_replace( $finder, $replacer, $className ) . '.php';
 
-            if( mb_strpos( $classFile, 'app/' ) === false ) {
-                $path = '../vendor/' . $classFile;
+            if( mb_strpos( $classFile, 'App/') === false ) {
+                $path = '../../vendor/' . $classFile;
             } else {
-                $path = '../' . $classFile;
+                $path = '../' . str_replace( 'App/', 'app/', $classFile );
             }
 
             if( is_readable( $path ) ) {
