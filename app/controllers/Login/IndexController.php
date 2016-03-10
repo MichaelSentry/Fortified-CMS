@@ -9,7 +9,7 @@ use NinjaSentry\Sai\Kernel\AppController;
  * Class IndexController
  * @package App\Controllers\Login
  */
-class IndexController extends AppController
+final class IndexController extends AppController
 {
     public function __construct( Response $response ){
         parent::__construct( $response );
@@ -18,19 +18,25 @@ class IndexController extends AppController
     public function getIndex()
     {
         /**
+         * Prepare form token
+         */
+        $this->response->content( 'token', $this->getFormToken() );
+        $this->response->content( 'secret', $this->session->appToken );
+
+        /**
          * Prepare page data container
          */
         $this->response->content( 'page', [
 
-            'title'           => 'NinjaSentry Fortress | Fortified Content Management',
+            'title'           => 'Fortress Sign In | Fortified Content Management',
 
             'meta'            => [
-                'description' => 'Fortress Login',
+                'description' => 'Fortress Sign In for registered members',
                 'keywords'    => '',
                 'robots'      => Robots::DENY_All
             ],
 
-            'content'         => $this->response->wrap( 'Fortress Login'
+            'content'         => $this->response->wrap( 'Fortress Sign In'
                 , $this->response->fetch( 'login/index' )
             )
 
