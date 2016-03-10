@@ -56,14 +56,13 @@ final class Bootstrap
     {
         if( ! empty( $className ) && is_string( $className ) )
         {
-            $finder    = [ chr(0), '\\' ];
-            $replacer  = [ '' ,  '/' ];
+            $finder    = [ chr(0), '\\', 'App/'];
+            $replacer  = [ '' ,  '/', 'app/' ];
             $classFile = str_replace( $finder, $replacer, $className ) . '.php';
+            $path      = '../' . $classFile;
 
-            if( mb_strpos( $classFile, 'App/') === false ) {
+            if( mb_strpos( $classFile, 'app/') === false ) {
                 $path = '../../vendor/' . $classFile;
-            } else {
-                $path = '../' . str_replace( 'App/', 'app/', $classFile );
             }
 
             if( is_readable( $path ) ) {
