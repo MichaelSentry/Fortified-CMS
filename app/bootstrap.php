@@ -1,7 +1,8 @@
 <?php
 namespace App;
-use NinjaSentry\Sai\Config;
+
 use NinjaSentry\Sai\Application;
+use NinjaSentry\Sai\Tools\Timer;
 
 /**
  * Core Functions
@@ -28,6 +29,10 @@ final class Bootstrap
     {
         try{
 
+            ob_start([ $this, 'stats' ]);
+
+            Timer::start();
+
             $app = new Application;
 
             $app->foundation()
@@ -36,6 +41,8 @@ final class Bootstrap
 
             echo $app->dispatch()
                 ->getContent();
+
+            ob_get_flush();
 
         }
         catch( \Exception $ex )
@@ -69,5 +76,26 @@ final class Bootstrap
                 return require $path;
             }
         }
+    }
+
+    /**
+     * Content output buffer rewrite wrapper
+     * replace timer tags with timer output
+     * replace memory tags with memory output
+     *
+     * @param $buffer
+     * @return mixed
+     * @throws \Exception
+     */
+    public function stats( $buffer )
+    {
+        $memory = memory_peak();
+        $timer  = Timer::end();
+
+        return str_replace(
+            [ "{%TIMER%}", "{%MEMORY%}" ]
+            , [ $timer, $memory ]
+            , $buffer
+        );
     }
 }
