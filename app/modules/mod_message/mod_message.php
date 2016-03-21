@@ -4,7 +4,7 @@ use NinjaSentry\Sai\Response\Message;
 if( ! $this->message instanceof Message )
 {
     throw new \Exception(
-        'Expected class Sai\Response\Message was not found'
+        'Expected instance of Sai\Response\Message was not found'
     );
 }
 
