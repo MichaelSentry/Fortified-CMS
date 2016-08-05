@@ -8,6 +8,14 @@ use NinjaSentry\Sai\Tools\Timer;
  * Core Functions
  */
 require '../../vendor/NinjaSentry/Sai/Functions/global.php';
+require '../../vendor/NinjaSentry/Sai/Functions/time.php';
+
+/**-----------------------------------------------------------------
+ * Load error handlers
+ *-----------------------------------------------------------------*/
+require '../../vendor/NinjaSentry/Sai/kernel/error_handler.php';
+require '../../vendor/NinjaSentry/Sai/kernel/exception_handler.php';
+require '../../vendor/NinjaSentry/Sai/kernel/shutdown_handler.php';
 
 /**
  * Class Bootstrap
@@ -15,7 +23,6 @@ require '../../vendor/NinjaSentry/Sai/Functions/global.php';
 final class Bootstrap
 {
     /**
-     * Bootstrap Constructor
      * Register Class AutoLoader
      */
     public function __construct() {
@@ -55,11 +62,13 @@ final class Bootstrap
     }
 
     /**
+     * Class AutoLoader :)
+     *
      * @param $className
      * @return bool|mixed
      * @throws \Exception
      */
-    public function classLoader( $className = '' )
+    private function classLoader( $className = '' )
     {
         if( ! empty( $className ) && is_string( $className ) )
         {
@@ -68,7 +77,7 @@ final class Bootstrap
             $classFile = str_replace( $finder, $replacer, $className ) . '.php';
             $path      = '../' . $classFile;
 
-            if( mb_strpos( $classFile, 'app/') === false ) {
+            if( mb_strpos( $classFile, 'app/' ) === false ) {
                 $path = '../../vendor/' . $classFile;
             }
 
@@ -87,7 +96,7 @@ final class Bootstrap
      * @return mixed
      * @throws \Exception
      */
-    public function stats( $buffer )
+    private function stats( $buffer )
     {
         $memory = memory_peak();
         $timer  = Timer::end();
