@@ -1,5 +1,5 @@
 <?php
-namespace App\Kernel\Exception;
+namespace App\Kernel\Error;
 
 use NinjaSentry\Sai\Response;
 use NinjaSentry\Sai\Tools\Robots;
@@ -8,25 +8,31 @@ use NinjaSentry\Sai\Kernel\AppController;
 
 /**
  * Class NotFound
- * @package App\Kernel\Exception
+ * @package App\Kernel\Error
  */
-class NotFound extends AppController
+final class NotFound extends AppController
 {
+    /**
+     * @param Response $response
+     */
     public function __construct( Response $response ){
         parent::__construct( $response );
     }
 
+    /**
+     * @throws \Exception
+     */
     public function getIndex()
     {
         /**
-         * Add 404 Not Found header
+         * Get http protocol version
          */
-        //$this->response->httpHeader( STATUS::NOT_FOUND );
+        $protocol = $this->client->protocol;
 
         /**
-         * Set not found http header
+         * Set '404 Not Found' response header
          */
-        $this->response->httpHeader( 'HTTP/1.1 404 Not Found' );
+        $this->response->httpHeader( $protocol . ' ' . STATUS::NOT_FOUND );
         $this->response->httpHeader( 'Status: Connection close' );
 
         /**
@@ -34,15 +40,15 @@ class NotFound extends AppController
          */
         $this->response->content( 'page', [
 
-            'title'           => 'Page Not Found | ',
+            'title'           => '404 Page Not Found | ' . $this->siteName,
 
             'meta'            => [
                 'description' => 'Page Not Found',
                 'keywords'    => '',
-                'robots'      => Robots::DENY_All
+                'robots'      => Robots::DENY_ALL // page should not be indexed / archived
             ],
 
-            'content'         => $this->response->wrap( 'Not Found'
+            'content'         => $this->response->wrap( 'Page Not Found'
                 , $this->response->fetch( 'error/not-found' )
             )
 
@@ -51,4 +57,3 @@ class NotFound extends AppController
         $this->display();
     }
 }
-
