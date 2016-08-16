@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers\Category;
 
+use NinjaSentry\Sai\Response;
 use App\Models\Article\Category;
 use NinjaSentry\Sai\Kernel\AppController;
 
@@ -13,7 +14,7 @@ final class IndexController extends AppController
     /**
      * @param \NinjaSentry\Sai\Response $response
      */
-    public function __construct( $response ){
+    public function __construct( Response $response ){
         parent::__construct( $response );
     }
 
@@ -42,8 +43,8 @@ final class IndexController extends AppController
             'title'           => 'Category List | ' . $this->siteName,
 
             'meta'            => [
-                'description' => 'list of article categories',
-                'keywords'    => 'article category',
+                'description' => 'list of all article categories',
+                'keywords'    => 'category list',
             ],
 
             'content'         => $this->response->wrap( 'Category List'
