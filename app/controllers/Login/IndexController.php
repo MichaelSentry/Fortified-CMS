@@ -11,10 +11,16 @@ use NinjaSentry\Sai\Kernel\AppController;
  */
 final class IndexController extends AppController
 {
+    /**
+     * @param \NinjaSentry\Sai\Response $response
+     */
     public function __construct( Response $response ){
         parent::__construct( $response );
     }
 
+    /**
+     * @throws \Exception
+     */
     public function getIndex()
     {
         /**
@@ -28,12 +34,12 @@ final class IndexController extends AppController
          */
         $this->response->content( 'page', [
 
-            'title'           => 'Fortress Sign In | Fortified Content Management',
+            'title'           => 'Sign In | ' . $this->siteName,
 
             'meta'            => [
-                'description' => 'Fortress Sign In for registered members',
+                'description' => 'Sign in page for registered members',
                 'keywords'    => '',
-                'robots'      => Robots::DENY_All
+                'robots'      => Robots::DENY_ALL
             ],
 
             'content'         => $this->response->wrap( 'Fortress Sign In'
