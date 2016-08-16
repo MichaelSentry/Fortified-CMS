@@ -90,7 +90,12 @@ final class IndexController extends AppController
         /**
          * Load Article reader model
          */
-        $article = new Reader( $paths );
+        $article = new Reader( $this->identity );
+
+        /**
+         * Source file paths
+         */
+        $article->setPaths( $paths );
 
         /**
          * Check article file exists
