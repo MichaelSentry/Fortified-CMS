@@ -16,9 +16,6 @@ Freedom from complexity. Less complex is more secure.
 To build a simplified, intrusion resistant, self defending web application that provides a secure platform
 in even the lowest quality free & shared web hosting environments.  
   
-Can be used to build a simple blog, or a much larger website.  
-Provides protection against abusive bots and the content theft industry in general.  
-  
 ## Features  
   
 Admin CP / Application firewall management system    
@@ -33,9 +30,9 @@ Page cache
 Custom Themes  
 Session guard against bots  
   
-lots more to add.. 
+lots more to add..  
   
-## Not Found  
+## Not Found | Unavailable  
   
 No database required.  
 No remote callbacks, auto updates.  
